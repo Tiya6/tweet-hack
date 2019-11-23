@@ -12,8 +12,7 @@ module.exports.create = (req, res, next) => {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
-    avatar: req.body.avatar,
-    bootcamp: req.body.bootcamp
+    avatar: req.body.avatar
   })
 
   user.save()
@@ -60,7 +59,29 @@ module.exports.login = (_, res) => {
 }
 
 module.exports.doLogin = (req, res, next) => {
-  res.send('TODO')
+  const {email, password} = req.body
+  if(!email || !password){
+    res.render('users/login')
+  }
+  User.findOne({email})
+  .then(user => {
+    if(!user){
+      res.render('users/login')
+    }
+    user.checkPassword(password)
+    .then(  response =>{
+        console.log(response)
+        if(response){
+          req.session.user = user
+          res.redirect('/')
+        }
+        res.render('users/login')
+      }
+    ).catch(error =>{console.log(error)})
+
+    
+  })
+  .catch()
 }
 
 module.exports.logout = (req, res) => {

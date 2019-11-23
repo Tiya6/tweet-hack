@@ -1,0 +1,7 @@
+<img src="{{user.avatar}}" class="img-thumbnail rounded-circle">
+<p>{{user.name}}</p>
+<a href="/{{user.username}}">@{{user.username}}</a>
+<p>{{user.bio}}</p>
+<form method="POST" action="/logout">
+  <button type="submit" class="btn btn-danger">Logout</button>
+</form>

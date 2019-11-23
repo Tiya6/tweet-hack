@@ -1,0 +1,19 @@
+<form method="POST" action="/tweet">
+  <textarea name="text" rows="3"></textarea>
+  <input name="image" placeholder="image">
+  <button type="submit" class="btn btn-success">Tweet</button>
+
+</form>
+
+
+{{#each tweets as |t|}}
+<div class="card" style="width: 18rem;">
+  <img src="{{t.image}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">{{t.text}}</p>
+    <a href="/user/{{t.user._id}}"><h5>{{t.user.name}}</h5></a>
+    <a href="/tweet/{{t._id}}/like">Like</a>
+{{/each}}
+
+
+
